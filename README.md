@@ -48,7 +48,7 @@ $(function()
 	/*
 	 * Attach to a form with default settings
 	 */
-	$('#form_id').autosave_tcf();
+	$('#form_id').sayt();
 	
 	
 	/*
@@ -58,13 +58,13 @@ $(function()
 	 * Autorecover disabled (Must use a manual recover to recover anything)
 	 * Days 7 (Keeps the save cookie for 7 days)
 	 */
-	$('#form_id').autosave_tcf({'autosave': false, 'autorecover': false, 'days': 7});
+	$('#form_id').sayt({'autosave': false, 'autorecover': false, 'days': 7});
 	
 	
 	/*
 	 * Check to see if a form has a save
 	 */
-	if($('#form_id').autosave_tcf({'checksaveexists': true}) == true)
+	if($('#form_id').sayt({'checksaveexists': true}) == true)
 	{
 		console.log('Form has an existing save cookie.');
 	}
@@ -75,7 +75,7 @@ $(function()
 	 */
 	$('#forms_save_button').click(function()
 	{
-		$('#form_id').autosave_tcf({'savenow': true});
+		$('#form_id').sayt({'savenow': true});
 		
 		console.log('Form data has been saved.');
 		return false;
@@ -87,7 +87,7 @@ $(function()
 	 */
 	$('#forms_recover_button').click(function()
 	{
-		$('#form_id').autosave_tcf({'recover': true});
+		$('#form_id').sayt({'recover': true});
 		
 		console.log('Form data has been recovered.');
 		return false;
@@ -99,7 +99,7 @@ $(function()
 	 */
 	$('#forms_delete_save_button').click(function()
 	{
-		$('#form_id').autosave_tcf({'erase': true});
+		$('#form_id').sayt({'erase': true});
 		
 		console.log('Form cookie was deleted.');
 		return false;
