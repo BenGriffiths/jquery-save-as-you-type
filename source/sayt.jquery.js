@@ -189,7 +189,7 @@
 		 */
 		if(settings['autosave'] == true)
 		{
-			this.contents('input, select, textarea').each(function(index)
+			this.contents().find('input, select, textarea').each(function(index)
 			{
 				$(this).change(function()
 				{
