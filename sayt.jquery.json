@@ -3,7 +3,9 @@
 	"version": "1.2.2",
 	"title": "Save As You Type",
 	"author": {
-        "name": "Ben Griffiths"
+        "name": "Ben Griffiths",
+        "email": "ben@ben-griffiths.com",
+        "url": "http://www.ben-griffiths.com"
     },
 	"licenses": [
 		{
