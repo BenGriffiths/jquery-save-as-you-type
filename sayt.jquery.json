@@ -27,6 +27,8 @@
 		"autosave",
 		"cookie" ,
 		"forms",
+		"form",
+		"input"
 	],
 	"homepage": "https://github.com/BenGriffiths/jquery-save-as-you-type"
 }
