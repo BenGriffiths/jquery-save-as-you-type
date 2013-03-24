@@ -27,10 +27,6 @@
 		"autosave",
 		"cookie" ,
 		"forms",
-		"tcf",
-		"the",
-		"code",
-		"foundry"
 	],
 	"homepage": "https://github.com/BenGriffiths/jquery-save-as-you-type"
 }
