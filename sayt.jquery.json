@@ -1,16 +1,26 @@
 {
 	"name": "sayt",
 	"version": "1.1.1",
-	"title": "Save As You Type"
-	"author": "Ben Griffiths",
+	"title": "Save As You Type",
+	"author": {
+        "name": "Ben Griffiths"
+    },
 	"licenses": [
 		{
 			"type": "MIT",
 			"url": "http://www.opensource.org/licenses/mit-license.php"
 		}
 	],
+    "maintainers": [
+        {
+            "name": "Ben Griffiths",
+            "email": "ben@ben-griffiths.com",
+            "url": "http://www.ben-griffiths.com"
+        }
+    ],
 	"dependencies": {
-		"jquery-cookie": "1.0.0"
+		"jquery-cookie": ">=1.0.0",
+		"jquery": ">=1.5"
 	},
 	"description": "This jQuery plugin autosaves (To a cookie) as you type, and autorecovers, form data. Auto saving will save as data is entered or changed. You have the ability to disable autosaving and auto recovering, and instead use manual calls for each. You can also manually call an erase cookie feature, and manually call to see if a form actually has saved data. Works with the following elements so far: Text boxes, text areas, select (Single AND multiple), radio buttons and check boxes",
 	"keywords": [
