@@ -34,7 +34,7 @@ Default's:
 * autorecover: true
 * checksaveexists: false - (Returns true or false)
 
-```html
+```js
 $(function()
 {
 
