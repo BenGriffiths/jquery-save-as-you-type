@@ -120,7 +120,7 @@
 		 */
 		if(settings['savenow'] == true)
 		{
-			var form_data = theform.serializeArray();
+			var form_data = getFormData(theform);
 			autoSaveCookie(form_data);
 			
 			return true;
@@ -193,13 +193,13 @@
 			{
 				$(this).change(function()
 				{
-					var form_data = theform.serializeArray();
+					var form_data = getFormData(theform);
 					autoSaveCookie(form_data);
 				});
 				
 				$(this).keyup(function()
 				{
-					var form_data = theform.serializeArray();
+					var form_data = getFormData(theform);
 					autoSaveCookie(form_data);
 				});
 			});
@@ -231,5 +231,13 @@
 			return i === -1 ? false : i;
 		}
 		
+		/*
+		 * Serialize the form data, omit excluded fields.
+		 */
+		function getFormData(theform)
+		{
+			var form_data = theform.serializeArray();
+			return form_data;
+		}
 	};
 })(jQuery);
