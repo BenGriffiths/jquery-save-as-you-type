@@ -232,11 +232,15 @@
 		}
 		
 		/*
-		 * Serialize the form data, omit excluded fields.
+		 * Serialize the form data, omit excluded fields marked with data-sayt-exlude attribute.
 		 */
 		function getFormData(theform)
 		{
-			var form_data = theform.serializeArray();
+			var theformClone = theform.clone();
+			var elementsToRemove = theformClone.find('[data-sayt-exclude]');
+			elementsToRemove.remove();
+
+			var form_data = theformClone.serializeArray();
 			return form_data;
 		}
 	};
