@@ -232,7 +232,7 @@
 		}
 		
 		/*
-		 * Serialize the form data, omit excluded fields marked with data-sayt-exlude attribute.
+		 * Serialize the form data, omit excluded fields marked with data-sayt-exclude attribute.
 		 */
 		function getFormData(theform)
 		{
