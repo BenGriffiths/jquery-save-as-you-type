@@ -115,7 +115,7 @@ This is useful is you'd like to delete a cookie via a different method (IE With 
 
 ## Excluding Fields
 
-Thanks to @georgjaehnig you can now exlcude certain fields from being included in the cookie by adding the `data-sayt-exclude` attribute on the form element.
+Thanks to @georgjaehnig you can now exclude certain fields from being included in the cookie by adding the `data-sayt-exclude` attribute on the form element.
 
 
 ## Dependencies
