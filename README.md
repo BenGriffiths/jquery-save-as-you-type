@@ -113,6 +113,11 @@ Cookies are saved with the name autosaveFormCookie-, and have the ID of the form
 This is useful is you'd like to delete a cookie via a different method (IE With your server side code after saving a forms input).
 
 
+## Excluding Fields
+
+Thanks to @georgjaehnig you can now exlcude certain fields from being included in the cookie by adding the `data-sayt-exclude` attribute on the form element.
+
+
 ## Dependencies
 
 This plugin depends on the included jquery-cookie plugin. More information on that plugin can be found here: https://github.com/carhartl/jquery-cookie
