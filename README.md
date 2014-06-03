@@ -115,8 +115,29 @@ This is useful is you'd like to delete a cookie via a different method (IE With 
 
 ## Excluding Fields
 
-Thanks to @georgjaehnig you can now exlcude certain fields from being included in the cookie by adding the `data-sayt-exclude` attribute on the form element.
+Thanks to @georgjaehnig you can now exclude certain fields from being included in the cookie. There are two ways to do this.
 
+### Adding an attribute on the form element
+
+By adding the `data-sayt-exclude` attribute on the form element, the element's value will not be saved in the cookie. Example:
+```
+<input name="first" id="dontSaveMe" data-sayt-exclude>
+<input name="second" id="saveMe">
+```
+The value of the first element will not be saved, the value of the second will be.
+
+### Providing a list of CSS selectors on the function call
+
+Alternatively, you may call the init function with the setting `exclude` containing a list of selectors that define elements to be excluded. This may be useful when having no access to the HTML source. For instance:
+```
+<input name="first" id="dontSaveMe">
+<input name="second" class="dontSaveMeAsWell">
+<input name="third" id="saveMe">
+```
+```
+$('#form_id').sayt({'exclude': ['#dontSaveMe', '[name=second]']});
+```
+The value of the first and second element will not be saved, the value of the third will be.
 
 ## Dependencies
 

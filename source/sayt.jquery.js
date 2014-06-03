@@ -70,7 +70,8 @@
 			'savenow'        : false,
 			'recover'        : false,
 			'autorecover'    : true,
-			'checksaveexists': false
+			'checksaveexists': false,
+			'exclude'        : []
 		}, options);
 		
 		
@@ -120,7 +121,7 @@
 		 */
 		if(settings['savenow'] == true)
 		{
-			var form_data = getFormData(theform);
+			var form_data = getFormData(theform, settings['exclude']);
 			autoSaveCookie(form_data);
 			
 			return true;
@@ -193,13 +194,13 @@
 			{
 				$(this).change(function()
 				{
-					var form_data = getFormData(theform);
+					var form_data = getFormData(theform, settings['exclude']);
 					autoSaveCookie(form_data);
 				});
 				
 				$(this).keyup(function()
 				{
-					var form_data = getFormData(theform);
+					var form_data = getFormData(theform, settings['exclude']);
 					autoSaveCookie(form_data);
 				});
 			});
@@ -232,13 +233,17 @@
 		}
 		
 		/*
-		 * Serialize the form data, omit excluded fields marked with data-sayt-exlude attribute.
+		 * Serialize the form data, omit excluded fields marked with data-sayt-exclude attribute.
 		 */
-		function getFormData(theform)
+		function getFormData(theform, excludeSelectors)
 		{
 			var theformClone = theform.clone();
 			var elementsToRemove = theformClone.find('[data-sayt-exclude]');
 			elementsToRemove.remove();
+			for (i in excludeSelectors) {
+				elementsToRemove = theformClone.find(excludeSelectors[i]);
+				elementsToRemove.remove();
+			}
 
 			var form_data = theformClone.serializeArray();
 			return form_data;
