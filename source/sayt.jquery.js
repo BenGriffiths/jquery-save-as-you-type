@@ -87,7 +87,13 @@
 		if(settings['erase'] == true)
 		{
 			$.cookie('autosaveFormCookie-' + theform.attr('id'), null, { expires: settings['days'] });
-			
+			if (typeof(Storage) !== "undefined") {
+				localStorage.setItem('autosaveFormCookie-' + theform.attr('id'), null);
+			}
+			else {
+				$.cookie('autosaveFormCookie-' + theform.attr('id'), null, { expires: settings['days'] });
+			}
+
 			return true;
 		}
 		
@@ -95,7 +101,14 @@
 		/*
 		 * Get the forms save cookie (if it has one of course)
 		 */
-		var autoSavedCookie = $.cookie('autosaveFormCookie-' + theform.attr('id'));
+		var autoSavedCookie;
+		if (typeof(Storage) !== "undefined") {
+			autoSavedCookie = localStorage.getItem('autosaveFormCookie-' + theform.attr('id'));
+		}
+		else {
+			autoSavedCookie = $.cookie('autosaveFormCookie-' + theform.attr('id'));
+		}
+
 		
 		
 		/*
@@ -220,6 +233,13 @@
 			});
 			
 			$.cookie('autosaveFormCookie-' + theform.attr('id'), cookieString, { expires: settings['days'] });
+			if (typeof(Storage) !== "undefined") {
+				localStorage.setItem('autosaveFormCookie-' + theform.attr('id'), cookieString);
+			}
+			else {
+				$.cookie('autosaveFormCookie-' + theform.attr('id'), cookieString, { expires: settings['days'] });
+			}
+
 		}
 		
 		
