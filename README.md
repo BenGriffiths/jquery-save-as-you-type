@@ -1,6 +1,14 @@
 # Save As You Type
 
-This jQuery plugin autosaves (To a cookie) as you type, and autorecovers, form data. Auto saving will save as data is entered or changed.
+* ##### Update v.1.4.0 #####
+Thanks to @BluntSporks this plugin will not utilize Local Storage if its available instead of a cookie, enabling the saved data stored to be of a much larger amount (~5mb). If local storage is not available it'll default back to a cookie.
+
+* ##### Update v.1.3.0 ####
+Thanks to @georgjaehnig you can now exclude certain fields from being included in the cookie. There are two ways to do this.
+
+#### Features ####
+
+This jQuery plugin autosaves (To either Local Storage or a cookie if it's not available) as you type, and autorecovers, form data. Auto saving will save as data is entered or changed.
 
 You have the ability to disable autosaving and auto recovering, and instead use manual calls for each. You can also manually call an erase cookie feature, and manually call to see if a form actually has saved data.
 
