@@ -1,7 +1,7 @@
 # Save As You Type
 
 * ##### Update v.1.4.0 #####
-Thanks to @BluntSporks this plugin will not utilize Local Storage if its available instead of a cookie, enabling the saved data stored to be of a much larger amount (~5mb). If local storage is not available it'll default back to a cookie.
+Thanks to @BluntSporks this plugin will now utilize Local Storage if its available instead of a cookie, enabling the saved data stored to be of a much larger amount (~5mb). If local storage is not available it'll default back to a cookie.
 
 * ##### Update v.1.3.0 ####
 Thanks to @georgjaehnig you can now exclude certain fields from being included in the cookie. There are two ways to do this.
