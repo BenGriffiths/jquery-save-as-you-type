@@ -87,7 +87,7 @@
         {
             $.cookie('autosaveFormCookie-' + theform.attr('id'), null, { expires: settings['days'] });
             if (typeof(Storage) !== "undefined") {
-                localStorage.setItem('autosaveFormCookie-' + theform.attr('id'), null);
+                localStorage.removeItem('autosaveFormCookie-' + theform.attr('id'));
             }
             else {
                 $.cookie('autosaveFormCookie-' + theform.attr('id'), null, { expires: settings['days'] });
