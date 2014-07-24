@@ -16,7 +16,7 @@
  *
  * Intructions:
  * By: Ben Griffiths, ben@ben-griffiths.com
- * Version: 1.4.1
+ * Version: 1.4.3
  *
  * Dependencies:
  *
