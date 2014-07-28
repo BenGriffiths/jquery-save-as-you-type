@@ -63,6 +63,7 @@
          */
         var settings = $.extend(
         {
+            'prefix'         : 'autosaveFormCookie-',
             'erase'          : false,
             'days'           : 3,
             'autosave'       : true,
@@ -73,24 +74,27 @@
             'exclude'        : []
         }, options);
 
-
         /*
          * Define the form
          */
         var theform = this;
 
+        /*
+         * Define the cookie name
+         */
+        var cookie_id = settings.prefix + theform.attr('id');
 
         /*
          * Erase a cookie
          */
         if(settings['erase'] == true)
         {
-            $.cookie('autosaveFormCookie-' + theform.attr('id'), null, { expires: settings['days'] });
+            $.cookie( cookie_id, null);
             if (typeof(Storage) !== "undefined") {
-                localStorage.removeItem('autosaveFormCookie-' + theform.attr('id'));
+                localStorage.removeItem(cookie_id);
             }
             else {
-                $.cookie('autosaveFormCookie-' + theform.attr('id'), null, { expires: settings['days'] });
+                $.cookie(cookie_id, null);
             }
 
             return true;
@@ -102,10 +106,10 @@
          */
         var autoSavedCookie;
         if (typeof(Storage) !== "undefined") {
-            autoSavedCookie = localStorage.getItem('autosaveFormCookie-' + theform.attr('id'));
+            autoSavedCookie = localStorage.getItem(cookie_id);
         }
         else {
-            autoSavedCookie = $.cookie('autosaveFormCookie-' + theform.attr('id'));
+            autoSavedCookie = $.cookie(cookie_id);
         }
 
 
@@ -188,7 +192,7 @@
             }
 
             /*
-             * if manual recover action, return false
+             * if manual recover action, return
              */
             if(settings['recover'] == true)
             {
@@ -231,16 +235,15 @@
                 cookieString = cookieString + field.name + ':::--FIELDANDVARSPLITTER--:::' + field.value + ':::--FORMSPLITTERFORVARS--:::';
             });
 
-            $.cookie('autosaveFormCookie-' + theform.attr('id'), cookieString, { expires: settings['days'] });
+            $.cookie(cookie_id, cookieString, { expires: settings['days'] });
             if (typeof(Storage) !== "undefined") {
-                localStorage.setItem('autosaveFormCookie-' + theform.attr('id'), cookieString);
+                localStorage.setItem(cookie_id, cookieString);
             }
             else {
-                $.cookie('autosaveFormCookie-' + theform.attr('id'), cookieString, { expires: settings['days'] });
+                $.cookie(cookie_id, cookieString, { expires: settings['days'] });
             }
 
         }
-
 
         /*
          * strpos - equiv to PHP's strpos
