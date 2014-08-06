@@ -1,5 +1,8 @@
 # Save As You Type
 
+* ##### Update v.1.4.4 #####
+Various bug fixes have been implemented. Also, thanks to @npostman you can now specify a prefix to the cookie name to help you have greater control over your code.
+
 * ##### Update v.1.4.0 #####
 Thanks to @BluntSporks this plugin will now utilize Local Storage if its available instead of a cookie, enabling the saved data stored to be of a much larger amount (~5mb). If local storage is not available it'll default back to a cookie.
 
