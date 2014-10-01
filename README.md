@@ -22,6 +22,7 @@ Currently, the plugin works for the following form elements:
 * Select (Single AND multiple)
 * Radio buttons
 * Check boxes
+* Hidden fields
 
 Tested as working in:
 
