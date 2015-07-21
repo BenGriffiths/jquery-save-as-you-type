@@ -180,13 +180,14 @@
 
                         $.each(tmp_array, function(tmp_key, tmp_value)
                         {
-                            $('input[name="' + key + '"], select[name="' + key + '"], textarea[name="' + key + '"]').find('[value="' + tmp_value + '"]').prop('selected', true);
-                            $('input[name="' + key + '"][value="' + tmp_value + '"], select[name="' + key + '"][value="' + tmp_value + '"], textarea[name="' + key + '"][value="' + tmp_value + '"]').prop('checked', true);
+                            // added $(theform) to selectors
+                            $('input[name="' + key + '"], select[name="' + key + '"], textarea[name="' + key + '"]', $(theform) ).find('[value="' + tmp_value + '"]').prop('selected', true);
+                            $('input[name="' + key + '"][value="' + tmp_value + '"], select[name="' + key + '"][value="' + tmp_value + '"], textarea[name="' + key + '"][value="' + tmp_value + '"]', $(theform) ).prop('checked', true);
                         });
                     }
                     else
                     {
-                        $('input[name="' + key + '"], select[name="' + key + '"], textarea[name="' + key + '"]').val([value]);
+                        $('input[name="' + key + '"], select[name="' + key + '"], textarea[name="' + key + '"]', $(theform) ).val([value]);
                     }
                 });
             }
