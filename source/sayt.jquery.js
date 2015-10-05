@@ -93,10 +93,7 @@
             if (typeof(Storage) !== "undefined") {
                 localStorage.removeItem(cookie_id);
             }
-            else {
-                $.cookie(cookie_id, null);
-            }
-
+            
             return true;
         }
 
@@ -236,7 +233,6 @@
                 cookieString = cookieString + field.name + ':::--FIELDANDVARSPLITTER--:::' + field.value + ':::--FORMSPLITTERFORVARS--:::';
             });
 
-            $.cookie(cookie_id, cookieString, { expires: settings['days'] });
             if (typeof(Storage) !== "undefined") {
                 localStorage.setItem(cookie_id, cookieString);
             }
