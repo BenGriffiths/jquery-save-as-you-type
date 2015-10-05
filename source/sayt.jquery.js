@@ -93,10 +93,7 @@
             if (typeof(Storage) !== "undefined") {
                 localStorage.removeItem(cookie_id);
             }
-            else {
-                $.cookie(cookie_id, null);
-            }
-
+            
             return true;
         }
 
