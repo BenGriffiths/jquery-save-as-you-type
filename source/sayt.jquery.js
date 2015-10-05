@@ -236,7 +236,6 @@
                 cookieString = cookieString + field.name + ':::--FIELDANDVARSPLITTER--:::' + field.value + ':::--FORMSPLITTERFORVARS--:::';
             });
 
-            $.cookie(cookie_id, cookieString, { expires: settings['days'] });
             if (typeof(Storage) !== "undefined") {
                 localStorage.setItem(cookie_id, cookieString);
             }
