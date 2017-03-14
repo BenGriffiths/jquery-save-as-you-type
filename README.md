@@ -79,15 +79,18 @@ $(function()
 	/*
 	 * Override form id so multiple forms can share one save.
 	 * Useful for initialyzing fields in multiple forms or on different pages
-	 * Or "wizard" style forms where an initial forms values are carried forward
+	 * Or "wizard" style forms where an initial form's values are carried forward
 	 * to the next form in the sequence.
 	 * 
 	 * Example:
 	 * The first line will remember the fields typed in the first blank form of class "form_class".
 	 * The second and third line will remember the state of a specific form.
 	 *
-	 * When the second blank form is opened it is first initialized with "form_class" and then by its own specific id which being blank does nothing but take on the initial values.
-	 * From then on each form remembers it's own values because the second line always overwrites the first line.
+	 * When the second blank form is opened it is first initialized with "form_class" 
+	 * and then by its own specific id which being blank does nothing but take on the 
+	 * initial values.
+	 * From then on each form remembers it's own values because the second line always 
+	 * overwrites the first line.
 	 */
 	 $('.form_class').sayt({ 'id': 'common' });  //class specific cookie id = prefix + 'common'
 	 $('#form_id_1').sayt();                     //id specific cookie id = prefix + 'form_id_1'
