@@ -83,14 +83,15 @@ $(function()
 	 * Example:
 	 *
 	 *
-	 * The first line will remember the fields typed in the first blank form.
-	 * The second line will remember the state of a specific field.
+	 * The first line will remember the fields typed in the first blank form of class "demo-form".
+	 * The second and third line will remember the state of a specific field.
 	 *
 	 * When the second blank form is opened it is first initialized with "demo-common" and then by its own specific id which being blank does nothing but take on the initial values.
-	 * From then on each field remembers it's own values because the second line always overwrites the first line.
+	 * From then on each form remembers it's own values because the second line always overwrites the first line.
 	 */
-	 $('#demo-form-'+'<?php echo $post_id; ?>').sayt({ 'id': 'common' });
-	 $('#demo-form-'+'<?php echo $post_id; ?>').sayt();
+	 $('.demo-form').sayt({ 'id': 'common' });  //class specific
+	 $('#demo-form-1').sayt();     //id specific
+	 $('#demo-form-2').sayt();     //id specific
 	 	
 	/*
 	 * Check to see if a form has a save
