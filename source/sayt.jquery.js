@@ -71,7 +71,8 @@
             'recover'        : false,
             'autorecover'    : true,
             'checksaveexists': false,
-            'exclude'        : []
+            'exclude'        : [],
+            'id'             : this.attr('id'), 
         }, options);
 
         /*
@@ -82,7 +83,7 @@
         /*
          * Define the cookie name
          */
-        var cookie_id = settings.prefix + theform.attr('id');
+        var cookie_id = settings.prefix + settings.id;
 
         /*
          * Erase a cookie
@@ -93,9 +94,9 @@
             if (typeof(Storage) !== "undefined") {
                 localStorage.removeItem(cookie_id);
             }
-            else {
-                $.cookie(cookie_id, null);
-            }
+//            else {
+//                $.cookie(cookie_id, null);
+//            }
 
             return true;
         }
@@ -236,7 +237,7 @@
                 cookieString = cookieString + field.name + ':::--FIELDANDVARSPLITTER--:::' + field.value + ':::--FORMSPLITTERFORVARS--:::';
             });
 
-            $.cookie(cookie_id, cookieString, { expires: settings['days'] });
+//            $.cookie(cookie_id, cookieString, { expires: settings['days'] });
             if (typeof(Storage) !== "undefined") {
                 localStorage.setItem(cookie_id, cookieString);
             }

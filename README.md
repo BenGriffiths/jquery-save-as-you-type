@@ -1,5 +1,8 @@
 # Save As You Type
 
+* ##### Update v.1.4.5 #####
+Added "id" to settings so you can allow several forms to share a common form save.
+
 * ##### Update v.1.4.4 #####
 Various bug fixes have been implemented. Also, thanks to @npostman you can now specify a prefix to the cookie name to help you have greater control over your code.
 
@@ -45,6 +48,7 @@ Default's:
 * recover: false
 * autorecover: true
 * checksaveexists: false - (Returns true or false)
+* id: this.attr('id')      (defaults to form id)
 
 ```js
 $(function()
@@ -72,7 +76,26 @@ $(function()
 	 */
 	$('#form_id').sayt({'autosave': false, 'autorecover': false, 'days': 7});
 	
-	
+	/*
+	 * Override form id so multiple forms can share one save.
+	 * Useful for initialyzing fields in multiple forms or on different pages
+	 * Or "wizard" style forms where an initial form's values are carried forward
+	 * to the next form in the sequence.
+	 * 
+	 * Example:
+	 * The first line will remember the fields typed in the first blank form of class "form_class".
+	 * The second and third line will remember the state of a specific form.
+	 *
+	 * When the second blank form is opened it is first initialized with "form_class" 
+	 * and then by its own specific id which being blank does nothing but take on the 
+	 * initial values.
+	 * From then on each form remembers it's own values because the second line always 
+	 * overwrites the first line.
+	 */
+	 $('.form_class').sayt({ 'id': 'common' });  //class specific cookie id = prefix + 'common'
+	 $('#form_id_1').sayt();                     //id specific cookie id = prefix + 'form_id_1'
+	 $('#form_id_2').sayt();                     //id specific cookie id = prefix + 'form_id_2'
+	 	
 	/*
 	 * Check to see if a form has a save
 	 */
