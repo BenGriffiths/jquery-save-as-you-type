@@ -69,10 +69,11 @@
             'autosave'       : true,
             'savenow'        : false,
             'recover'        : false,
+            'getformdata'    : false,
             'autorecover'    : true,
             'checksaveexists': false,
             'exclude'        : [],
-            'id'             : this.attr('id'), 
+            'id'             : this.attr('id'),
         }, options);
 
         /*
@@ -114,7 +115,6 @@
         }
 
 
-
         /*
          * Check to see if a save exists
          */
@@ -143,6 +143,7 @@
 
             return true;
         }
+
 
 
         /*
@@ -200,6 +201,15 @@
             {
                 return true;
             }
+        }
+
+
+        /*
+         * Return form data
+         */
+        if(settings['getformdata'] == true)
+        {
+            return getFormData(theform, settings['exclude']);
         }
 
 
@@ -266,17 +276,24 @@
             //
             // Once they fix that, we'll put it back.
             //
-            var workingObject = $.extend({}, theform);
+            var exclude = '[data-sayt-exclude]';
 
+            if(Array.isArray(excludeSelectors)) {
+                exclude += excludeSelectors.length > 0 ? ', ' + excludeSelectors.join(', ') : '';
+            }
+
+            return $(':not(' + exclude + ')', theform).serializeArray();
+
+            /*
             var elementsToRemove = workingObject.find('[data-sayt-exclude]');
             elementsToRemove.remove();
             for (i in excludeSelectors) {
                 elementsToRemove = workingObject.find(excludeSelectors[i]);
                 elementsToRemove.remove();
             }
-
             var form_data = workingObject.serializeArray();
             return form_data;
+            */
         }
     };
 })(jQuery);
