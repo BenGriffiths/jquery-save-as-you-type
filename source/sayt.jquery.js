@@ -112,6 +112,54 @@
         }
 
         /*
+         * Save form data to a cookie
+         */
+        var autoSaveCookie = function(data)
+        {
+            var cookieString = '';
+
+            jQuery.each(data, function(i, field)
+            {
+                cookieString = cookieString + field.name + ':::--FIELDANDVARSPLITTER--:::' + field.value + ':::--FORMSPLITTERFORVARS--:::';
+            });
+
+            if (typeof(Storage) !== "undefined") {
+                localStorage.setItem(cookie_id, cookieString);
+            }
+            else {
+                $.cookie(cookie_id, cookieString, { expires: settings.days });
+            }
+        };
+
+        /*
+         * strpos - equiv to PHP's strpos
+         */
+        var strpos = function(haystack, needle, offset)
+        {
+            var i = (haystack+'').indexOf(needle, (offset || 0));
+            return i === -1 ? false : i;
+        };
+
+        /*
+         * Serialize the form data, omit excluded fields marked with data-sayt-exclude attribute.
+         */
+        var getFormData = function(theform, excludeSelectors)
+        {
+            //
+            // This is here because jQuery's clone method is basically borked.
+            //
+            // Once they fix that, we'll put it back.
+            //
+            var exclude = '[data-sayt-exclude]';
+
+            if(Array.isArray(excludeSelectors)) {
+                exclude += excludeSelectors.length > 0 ? ', ' + excludeSelectors.join(', ') : '';
+            }
+
+            return $(':not(' + exclude + ')', theform).serializeArray();
+        };
+
+        /*
          * Perform a manual save
          */
         if(settings.savenow === true)
@@ -190,78 +238,19 @@
          */
         if(settings.autosave === true)
         {
-            this.find('input, select, textarea').each(function(index)
+            this.find('input, select, textarea').each(function()
             {
                 $(this).on({
-                    change: function() {
+                    change: function()
+                    {
                         autoSaveCookie( getFormData(theform, settings.exclude) );
                     },
-                    keyup: function() {
+                    keyup: function()
+                    {
                         autoSaveCookie( getFormData(theform, settings.exclude) );
                     }
                 });
             });
-        }
-
-        /*
-         * Save form data to a cookie
-         */
-        function autoSaveCookie(data)
-        {
-            var cookieString = '';
-
-            jQuery.each(data, function(i, field)
-            {
-                cookieString = cookieString + field.name + ':::--FIELDANDVARSPLITTER--:::' + field.value + ':::--FORMSPLITTERFORVARS--:::';
-            });
-
-//            $.cookie(cookie_id, cookieString, { expires: settings['days'] });
-            if (typeof(Storage) !== "undefined") {
-                localStorage.setItem(cookie_id, cookieString);
-            }
-            else {
-                $.cookie(cookie_id, cookieString, { expires: settings.days });
-            }
-
-        }
-
-        /*
-         * strpos - equiv to PHP's strpos
-         */
-        function strpos(haystack, needle, offset)
-        {
-            var i = (haystack+'').indexOf(needle, (offset || 0));
-            return i === -1 ? false : i;
-        }
-
-        /*
-         * Serialize the form data, omit excluded fields marked with data-sayt-exclude attribute.
-         */
-        function getFormData(theform, excludeSelectors)
-        {
-            //
-            // This is here because jQuery's clone method is basically borked.
-            //
-            // Once they fix that, we'll put it back.
-            //
-            var exclude = '[data-sayt-exclude]';
-
-            if(Array.isArray(excludeSelectors)) {
-                exclude += excludeSelectors.length > 0 ? ', ' + excludeSelectors.join(', ') : '';
-            }
-
-            return $(':not(' + exclude + ')', theform).serializeArray();
-
-            /*
-            var elementsToRemove = workingObject.find('[data-sayt-exclude]');
-            elementsToRemove.remove();
-            for (i in excludeSelectors) {
-                elementsToRemove = workingObject.find(excludeSelectors[i]);
-                elementsToRemove.remove();
-            }
-            var form_data = workingObject.serializeArray();
-            return form_data;
-            */
         }
     };
 })(jQuery);
