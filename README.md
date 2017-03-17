@@ -41,14 +41,18 @@ Tested as working in:
 
 Default's:
 
+* prefix: 'autosaveFormCookie-'
 * autosave: true
 * savenow: false
 * days: 3
 * erase: false
 * recover: false
 * autorecover: true
+* getformdata: false
 * checksaveexists: false - (Returns true or false)
+* exclude: []
 * id: this.attr('id')      (defaults to form id)
+
 
 ```js
 $(function()
@@ -139,6 +143,12 @@ $(function()
 		console.log('Form cookie was deleted.');
 		return false;
 	});
+	
+	/*
+	 * Get the form data
+	 */
+	var form_data = $('#form_id').sayt({ 'getformdata': true });
+	console.log(form_data);
 	
 });
 ```
