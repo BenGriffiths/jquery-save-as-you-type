@@ -16,7 +16,7 @@
  *
  * Intructions:
  * By: Ben Griffiths, ben@ben-griffiths.com
- * Version: 1.4.3
+ * Version: 1.4.5
  *
  * Dependencies:
  *
@@ -57,7 +57,6 @@
 {
     $.fn.sayt = function(options)
     {
-
         /*
          * Get/Set the settings
          */
@@ -89,79 +88,54 @@
         /*
          * Erase a cookie
          */
-        if(settings['erase'] == true)
+        if(settings.erase === true)
         {
             $.cookie( cookie_id, null);
             if (typeof(Storage) !== "undefined") {
                 localStorage.removeItem(cookie_id);
             }
-//            else {
-//                $.cookie(cookie_id, null);
-//            }
 
             return true;
         }
-
 
         /*
          * Get the forms save cookie (if it has one of course)
          */
-        var autoSavedCookie;
-        if (typeof(Storage) !== "undefined") {
-            autoSavedCookie = localStorage.getItem(cookie_id);
-        }
-        else {
-            autoSavedCookie = $.cookie(cookie_id);
-        }
-
+        var autoSavedCookie = (typeof(Storage) !== "undefined") ? localStorage.getItem(cookie_id) : $.cookie(cookie_id);
 
         /*
          * Check to see if a save exists
          */
-        if(settings['checksaveexists'] == true)
+        if(settings.checksaveexists === true)
         {
-            if(autoSavedCookie)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-            return false;
+            return autoSavedCookie ? true : false;
         }
-
 
         /*
          * Perform a manual save
          */
-        if(settings['savenow'] == true)
+        if(settings.savenow === true)
         {
-            var form_data = getFormData(theform, settings['exclude']);
-            autoSaveCookie(form_data);
+            autoSaveCookie( getFormData(theform, settings.exclude) );
 
             return true;
         }
 
-
-
         /*
          * Recover the form info from the cookie (if it has one)
          */
-        if(settings['autorecover'] == true || settings['recover'] == true)
+        if(settings.autorecover === true || settings.recover === true)
         {
             if(autoSavedCookie)
             {
-                var newCookieString = autoSavedCookie.split(':::--FORMSPLITTERFORVARS--:::');
-
-                var field_names_array = {};
+                var newCookieString = autoSavedCookie.split(':::--FORMSPLITTERFORVARS--:::'),
+                    field_names_array = {};
 
                 $.each(newCookieString, function(i, field)
                 {
                     var fields_arr = field.split(':::--FIELDANDVARSPLITTER--:::');
 
-                    if($.trim(fields_arr[0]) != '')
+                    if($.trim(fields_arr[0]) !== '')
                     {
                         if($.trim(fields_arr[0]) in field_names_array)
                         {
@@ -197,43 +171,37 @@
             /*
              * if manual recover action, return
              */
-            if(settings['recover'] == true)
+            if(settings.recover === true)
             {
                 return true;
             }
         }
 
-
         /*
          * Return form data
          */
-        if(settings['getformdata'] == true)
+        if(settings.getformdata === true)
         {
-            return getFormData(theform, settings['exclude']);
+            return getFormData(theform, settings.exclude);
         }
-
 
         /*
          * Autosave - on typing and changing
          */
-        if(settings['autosave'] == true)
+        if(settings.autosave === true)
         {
             this.find('input, select, textarea').each(function(index)
             {
-                $(this).change(function()
-                {
-                    var form_data = getFormData(theform, settings['exclude']);
-                    autoSaveCookie(form_data);
-                });
-
-                $(this).keyup(function()
-                {
-                    var form_data = getFormData(theform, settings['exclude']);
-                    autoSaveCookie(form_data);
+                $(this).on({
+                    change: function() {
+                        autoSaveCookie( getFormData(theform, settings.exclude) );
+                    },
+                    keyup: function() {
+                        autoSaveCookie( getFormData(theform, settings.exclude) );
+                    }
                 });
             });
         }
-
 
         /*
          * Save form data to a cookie
@@ -252,7 +220,7 @@
                 localStorage.setItem(cookie_id, cookieString);
             }
             else {
-                $.cookie(cookie_id, cookieString, { expires: settings['days'] });
+                $.cookie(cookie_id, cookieString, { expires: settings.days });
             }
 
         }
