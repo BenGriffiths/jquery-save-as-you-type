@@ -56,6 +56,7 @@
             'erase': false,
             'days': 3,
             'autosave': true,
+            'autosavedelay': 1000,
             'savenow': false,
             'recover': false,
             'getformdata': false,
@@ -208,14 +209,29 @@
          * Autosave - on typing and changing
          */
         if (settings.autosave === true) {
-            this.find('input, select, textarea').each(function() {
-                $(this).on({
-                    change: function() {
-                        autoSaveCookie(getFormData(theform, settings.exclude));
-                    },
-                    keyup: function() {
+
+            var autoSaveDelay = (function() {
+                    var timer = 0;
+                    return function(callback, ms){
+                        clearTimeout (timer);
+                        timer = setTimeout(callback, ms);
+                    };
+                })();
+
+            var triggerAutoSave = function() {
+                    if(settings.autosavedelay) {
+                        autoSaveDelay(function(){
+                            autoSaveCookie(getFormData(theform, settings.exclude));
+                        }, settings.autosavedelay);
+                    } else {
                         autoSaveCookie(getFormData(theform, settings.exclude));
                     }
+                };
+
+            this.find('input, select, textarea').each(function() {
+                $(this).on({
+                    change: triggerAutoSave,
+                    keyup: triggerAutoSave
                 });
             });
         }

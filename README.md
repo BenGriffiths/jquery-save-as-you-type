@@ -43,6 +43,7 @@ Default's:
 
 * prefix: 'autosaveFormCookie-'
 * autosave: true
+* autosavedelay: 1000 (delay autosave in milliseconds)
 * savenow: false
 * days: 3
 * erase: false
@@ -51,9 +52,9 @@ Default's:
 * getformdata: false
 * checksaveexists: false - (Returns true or false)
 * exclude: []
-* id: this.attr('id')      (defaults to form id)
-* onSave: null (callback function on save)
-* onRecover: null (callback function on recover)
+* id: this.attr('id') - (defaults to form id)
+* onSave: null - (callback function on save)
+* onRecover: null - (callback function on recover)
 
 
 ```js
