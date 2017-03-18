@@ -41,105 +41,125 @@ Tested as working in:
 
 Default's:
 
+* prefix: 'autosaveFormCookie-'
 * autosave: true
+* autosavedelay: 1000 (delay autosave in milliseconds)
 * savenow: false
 * days: 3
 * erase: false
 * recover: false
 * autorecover: true
+* getformdata: false
 * checksaveexists: false - (Returns true or false)
-* id: this.attr('id')      (defaults to form id)
+* exclude: []
+* id: this.attr('id') - (defaults to form id)
+* onSave: null - (callback function on save)
+* onRecover: null - (callback function on recover)
+
 
 ```js
-$(function()
-{
+$(function() {
 
-	/**
-	 * When building your forms, you MUST make sure your form has an ID, and that it's unique
-	 * on the application.
-	 *
-	 * Ie, don't call all forms 'id="form"', even if they are on seperate pages.
-	 */
-	
-	/*
-	 * Attach to a form with default settings
-	 */
-	$('#form_id').sayt();
-	
-	
-	/*
-	 * Attach to a form with custom settings
-	 *
-	 * Autosave disabled (Must use manual save to save anything)
-	 * Autorecover disabled (Must use a manual recover to recover anything)
-	 * Days 7 (Keeps the save cookie for 7 days)
-	 */
-	$('#form_id').sayt({'autosave': false, 'autorecover': false, 'days': 7});
-	
-	/*
-	 * Override form id so multiple forms can share one save.
-	 * Useful for initialyzing fields in multiple forms or on different pages
-	 * Or "wizard" style forms where an initial form's values are carried forward
-	 * to the next form in the sequence.
-	 * 
-	 * Example:
-	 * The first line will remember the fields typed in the first blank form of class "form_class".
-	 * The second and third line will remember the state of a specific form.
-	 *
-	 * When the second blank form is opened it is first initialized with "form_class" 
-	 * and then by its own specific id which being blank does nothing but take on the 
-	 * initial values.
-	 * From then on each form remembers it's own values because the second line always 
-	 * overwrites the first line.
-	 */
-	 $('.form_class').sayt({ 'id': 'common' });  //class specific cookie id = prefix + 'common'
-	 $('#form_id_1').sayt();                     //id specific cookie id = prefix + 'form_id_1'
-	 $('#form_id_2').sayt();                     //id specific cookie id = prefix + 'form_id_2'
-	 	
-	/*
-	 * Check to see if a form has a save
-	 */
-	if($('#form_id').sayt({'checksaveexists': true}) == true)
-	{
-		console.log('Form has an existing save cookie.');
-	}
-	
-	
-	/*
-	 * Perform a manual save
-	 */
-	$('#forms_save_button').click(function()
-	{
-		$('#form_id').sayt({'savenow': true});
-		
-		console.log('Form data has been saved.');
-		return false;
-	});
-	
-	
-	/*
-	 * Perform a manual recover
-	 */
-	$('#forms_recover_button').click(function()
-	{
-		$('#form_id').sayt({'recover': true});
-		
-		console.log('Form data has been recovered.');
-		return false;
-	});
-	
-	
-	/*
-	 * To erase a forms cookie
-	 */
-	$('#forms_delete_save_button').click(function()
-	{
-		$('#form_id').sayt({'erase': true});
-		
-		console.log('Form cookie was deleted.');
-		return false;
-	});
-	
+    /**
+     * When building your forms, you MUST make sure your form has an ID, and that it's unique
+     * on the application.
+     *
+     * Ie, don't call all forms 'id="form"', even if they are on seperate pages.
+     */
+    
+    /*
+     * Attach to a form with default settings
+     */
+    $('#form_id').sayt();
+    
+    
+    /*
+     * Attach to a form with custom settings
+     *
+     * Autosave disabled (Must use manual save to save anything)
+     * Autorecover disabled (Must use a manual recover to recover anything)
+     * Days 7 (Keeps the save cookie for 7 days)
+     */
+    $('#form_id').sayt({'autosave': false, 'autorecover': false, 'days': 7});
+    
+    /*
+     * Override form id so multiple forms can share one save.
+     * Useful for initialyzing fields in multiple forms or on different pages
+     * Or "wizard" style forms where an initial form's values are carried forward
+     * to the next form in the sequence.
+     * 
+     * Example:
+     * The first line will remember the fields typed in the first blank form of class "form_class".
+     * The second and third line will remember the state of a specific form.
+     *
+     * When the second blank form is opened it is first initialized with "form_class" 
+     * and then by its own specific id which being blank does nothing but take on the 
+     * initial values.
+     * From then on each form remembers it's own values because the second line always 
+     * overwrites the first line.
+     */
+     $('.form_class').sayt({ 'id': 'common' });  //class specific cookie id = prefix + 'common'
+     $('#form_id_1').sayt();                     //id specific cookie id = prefix + 'form_id_1'
+     $('#form_id_2').sayt();                     //id specific cookie id = prefix + 'form_id_2'
+        
+    /*
+     * Check to see if a form has a save
+     */
+    if($('#form_id').sayt({'checksaveexists': true}) == true) {
+        console.log('Form has an existing save cookie.');
+    }
+    
+    
+    /*
+     * Perform a manual save
+     */
+    $('#forms_save_button').click(function() {
+        $('#form_id').sayt({'savenow': true});
+        
+        console.log('Form data has been saved.');
+        return false;
+    });
+    
+    
+    /*
+     * Perform a manual recover
+     */
+    $('#forms_recover_button').click(function() {
+        $('#form_id').sayt({'recover': true});
+        
+        console.log('Form data has been recovered.');
+        return false;
+    });
+    
+    
+    /*
+     * To erase a forms cookie
+     */
+    $('#forms_delete_save_button').click(function() {
+        $('#form_id').sayt({'erase': true});
+        
+        console.log('Form cookie was deleted.');
+        return false;
+    });
+    
+    /*
+     * Get the form data
+     */
+    var form_data = $('#form_id').sayt({ 'getformdata': true });
+    console.log(form_data);
+    
+    /*
+     * Use callback functions on save or recover
+     */
+    $('#form_id').sayt({
+        'onSave': function() {
+            console.log('sayt save');
+        },
+        'onRecover': function() {
+            console.log('sayt recover');
+        }
+    });
+    
 });
 ```
 
