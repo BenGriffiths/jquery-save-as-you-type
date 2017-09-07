@@ -145,7 +145,7 @@ $(function()
 
 Cookies are saved with the name autosaveFormCookie-, and have the ID of the form on the end. For example, a form with the ID of "my_form", would result in a cookie named: autosaveFormCookie-my_form
 
-This is useful is you'd like to delete a cookie via a different method (IE With your server side code after saving a forms input).
+This is useful if you'd like to delete a cookie via a different method (IE With your server side code after saving a forms input).
 
 
 ## Excluding Fields
